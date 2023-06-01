@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+@model List<Genre>
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Show all genres</title>
+    <link href="~/css/stylesheet.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+    <h1>Showing all genres</h1>
+    <form action="/Genre/GenreSort">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Genre Name</th>
+            </tr>
+            @foreach (var g in Model)
+            {
+                <tr>
+                    <td>@g.Id</td>
+                    <td>@g.GenreName</td>
+                    <td><a href='/Genre/Modify?id=@g.Id' Modify>Modify</a></td>
+                    <td><a href='/Genre/Restore?id=@g.Id' Restore>Restore</a></td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2">
+                    <select name="sort">
+                        <option value="1" selected="@((ViewBag.sortId == 1) ? "selected" : null)">Sort by Name Ascending</option>
+                        <option value="2" selected="@((ViewBag.sortId == 2) ? "selected" : null)">Sort by Name Descending</option>
+                    </select>
+                </td>
+                <td colspan='2' style='text-align: right'>
+                    <button type='submit' value='Submit'>SortBy</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <a href='/Book/Index'>Return to home page</a>
+    <br />
+    <a href='/Genre/Index'>Add new genre</a>
+    <br />
+    <a href='/Genre/ShowAllGenres'>Show all Genres</a>
+    <br />
+    <a href='/Genre/ShowAllDeleted'>Show all Deleted</a>
+</body>
+
+</html>

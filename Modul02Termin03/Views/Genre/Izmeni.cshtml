@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+@model Genre
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Add new Genre</title>
+    <link href="~/css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <h1>Book Store - Home Page</h1>
+    <form action='/Genre/Izmeni' method="Post">
+        <table>
+            <th colspan='1'>Change existing genre</th>
+            <tr>              
+                 <td> Genre Id :</td>
+                <td><input id='Id' type='hidden' name='Id' value="@Model.Id">@Model.Id</td>
+            </tr>
+            <tr>
+                <td> Please enter new genre name :</td>
+                <td><input id='genreName' type='text' name='genreN'></td>
+            </tr>
+            <tr>
+                <td colspan='2' style='text-align: Center'><button type='submit' value='Submit'>Izmeni</button></td>
+            </tr>
+        </table>
+    </form>
+    <a href='/Genre/ShowAllGenres'>Show all genres</a>
+    <a href='/Book/Index'>Return to homepage</a>
+</body>
+</html>

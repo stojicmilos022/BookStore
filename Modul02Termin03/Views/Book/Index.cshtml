@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+@using Modul02Termin03.ViewModels
+
+
+
+
+@model GenreViewModel
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Book store - Home Page</title>
+    <link href="~/css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>   
+    <h1>Book Store - Home Page</h1>
+    <form action='/Book/Add'>
+
+        <table>
+            <th colspan='2'>Add new book</th>
+            <tr>
+                <th>Name of book :</th>
+                <td><input id='name' type='text' name='name'></td>
+            </tr>
+            <tr>
+                <th>Price of the book :</th>
+                <td><input id='price' type='number' name='price'></td>
+            </tr>
+            <tr>
+                <th>Genre of the book :</th>
+                <td>
+                        <genre-select></genre-select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='2' style='text-align: right'><button type='submit' value='Submit'>Add</button></td>
+            </tr>
+        </table>
+    </form>
+    <a href='/Book/ShowAllBooks'>Show all books</a>
+    <a href='/Book/ShowAllDeleted'>Show deleted books</a>
+    <a href='/Genre/ShowAllGenres'>Show all genres</a>
+</body>
+</html>

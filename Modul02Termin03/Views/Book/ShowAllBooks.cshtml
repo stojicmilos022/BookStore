@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+@model List<Book>
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Show all books</title>
+    <link href="~/css/stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+     <h1>Showing all books</h1>
+    <form action="/Book/BookSort">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Genre</th>
+        </tr>
+            @foreach (var k in Model)
+            {
+                    <tr>
+                    <td>@k.Id</td>
+                    <td>@k.BookName</td>
+                    <td>@k.Price</td>
+                    <td>@k.Genre.GenreName</td>
+                    <td><a href='/Book/Modify?id=@k.Id' Modify>Modify</a></td>
+                    <td><a href='/Book/Delete?id=@k.Id' Delete>Delete</a></td>
+                    </tr>
+            }
+
+    </table>
+
+
+                <select name="sort">
+                    <option value="1" selected="@((ViewBag.sortId == 1) ? "selected" : null)">Sort by Name Ascending</option>
+                    <option value="2" selected="@((ViewBag.sortId == 2) ? "selected" : null)">Sort by Name Descending</option>
+                    <option value="3" selected="@((ViewBag.sortId == 3) ? "selected" : null)">Sort by Price Ascending</option>
+                    <option value="4" selected="@((ViewBag.sortId == 4) ? "selected" : null)">Sort by Price Descending</option>
+                </select>
+
+        <button class="button" type='submit' value='Submit'>SortBy</button>
+    </form>
+
+    <a href='/Book/Index'>Return to homepage</a>
+</body>
+</html>

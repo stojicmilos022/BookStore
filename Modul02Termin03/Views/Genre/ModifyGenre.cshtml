@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+@*@model List<Student>*@
+@using Modul02Termin03.ViewModels
+@model Genre 
+
+
+<html>
+<head>
+    <title>Modify genres</title>
+    <link href="~/css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <form method='POST' action='/Genre/ModifyGenre'>
+        <input type="hidden" name="oldId" value="@Model.Id" />
+        <table>
+            <th colspan='2'>Modify genre</th>
+            <tr>
+                <th>Name of genre :</th>
+                <td><input id='GenreName' type='text' name='Genre.GenreName' value="@Model.GenreName" /></td>
+            </tr>
+            <tr>
+                <td colspan='2' style='text-align: right'><button class="button" type='submit' value='Submit'>Modify</button></td>
+            </tr>
+        </table>
+    </form>
+    <br />
+    <br />
+    <a href='/Genre/ShowAllGenres'>Show all genres</a> <br />
+    <a href='/Genre/Index'>Return to homepage</a>
+</body>
+</html>

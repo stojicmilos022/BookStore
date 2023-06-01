@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Add new Genre</title>
+    <link href="~/css/stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+   
+    <h1>Add new genre </h1>
+    <form action='/Genre/Add'>
+        <table>
+            <th colspan='1'>Add new genre</th>
+            <tr>
+   
+                <td><input id='genre' type='text' name='genreN'></td>
+            </tr>
+
+            <tr>
+                <td colspan='2' style='text-align: Center'><button type='submit' value='Submit'>Add</button></td>
+            </tr>
+        </table>
+    </form>
+    <a href='/Genre/ShowAllGenres'>Show all genres</a>
+    <a href='/Book/Index'>Return to homepage</a>
+</body>
+</html>
