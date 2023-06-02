@@ -22,12 +22,16 @@ namespace Modul02Termin03.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+           GenreViewModel gvm = new GenreViewModel();
+            gvm.Genre = new Genre();
+
+            return View(gvm);
         }
 
 
-        public IActionResult Add(string name)
+        public IActionResult Add(Genre Genre)
         {
+            /*
             Genre g = new Genre();
             var genres = GenreRepository.GetAll();
             //Genre genreNew = this.GenreRepository.GetOne(genreN);
@@ -47,6 +51,19 @@ namespace Modul02Termin03.Controllers
 
 
             }
+            return View("ShowAllGenres", this.GenreRepository.GetAll());
+            */
+
+
+            if (!ModelState.IsValid)
+            {
+
+                GenreViewModel gvm = new GenreViewModel();
+                gvm.Genre = Genre;
+
+                return View("Index", gvm);
+            }
+            this.GenreRepository.Create(Genre);
             return View("ShowAllGenres", this.GenreRepository.GetAll());
         }
         /*
@@ -140,6 +157,13 @@ namespace Modul02Termin03.Controllers
         [HttpPost]
         public IActionResult ModifyGenre(Genre Genre, int oldId)
         {
+            if (!ModelState.IsValid)
+            {
+                GenreViewModel gvm = new GenreViewModel();
+                gvm.Genre = Genre;
+
+                return View("Modify", gvm);
+            }
             GenreRepository.Update(Genre, oldId);
 
             return View("ShowAllGenres", GenreRepository.GetAll());

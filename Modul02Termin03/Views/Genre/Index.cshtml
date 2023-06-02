@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model GenreViewModel
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -17,11 +18,9 @@
     <form action='/Genre/Add'>
         <table>
             <th colspan='1'>Add new genre</th>
-            <tr>
-   
-                <td><input id='genre' type='text' name='genreN'></td>
+            <tr>  
+                <td><input id='genre' type='text' name='Genre.GenreName' value="@Model.Genre.GenreName"><span style="color:red">@Html.ValidationMessageFor(m => m.Genre.GenreName)</span></td>
             </tr>
-
             <tr>
                 <td colspan='2' style='text-align: Center'><button type='submit' value='Submit'>Add</button></td>
             </tr>

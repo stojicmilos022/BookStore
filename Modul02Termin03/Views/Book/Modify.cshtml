@@ -14,33 +14,26 @@
 <body>
 
     <form method='POST' action='/Book/Modify'>
-        <input type="hidden" name="oldId" value="@Model.Book.Genre.Id" />
+        <input type="hidden" name="oldId" value="@Model.Book.Id"/>
         <table>
             <th colspan='2'>Modify book</th>
             <tr>
                 <th>Name of book :</th>
-                <td><input id='BookName' type='text' name='Book.BookName' value="@Model.Book.BookName" /></td>
+                <td><input id='BookName' type='text' name='Book.BookName' value="@Model.Book.BookName" /><span style="color:red">@Html.ValidationMessageFor(m => m.Book.BookName)</span></td>
             </tr>
             <tr>
                 <th>Price of the book :</th>
-                <td><input id='Price' type='number' name='Book.Price' value="@Model.Book.Price" /></td>
+                <td><input id='Price' type='number' name='Book.Price' value="@Model.Book.Price" /><span style="color:red">@Html.ValidationMessageFor(m => m.Book.Price)</span></td>
             </tr>
             <tr>
                 <th>Genre of the book :</th>
                 <td>
-                    <select name="book.Genre.Id">
-                    @foreach (var genre in Model.Genres)
-                    {
-                        @if (genre.Id.Equals(Model.Book.Genre.Id))
-                        {
-                            <option value="@genre.Id" selected>@genre.GenreName</option>
-                        }
-                        else
+                    <select name="Book.Genre.Id">
+                        @foreach (Genre genre in Model.Genres)
                         {
                             <option value="@genre.Id">@genre.GenreName</option>
                         }
-                    }
-                    </select>
+                    </select><br />
                 </td>
                 
             </tr>

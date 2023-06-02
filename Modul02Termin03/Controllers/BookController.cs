@@ -32,15 +32,13 @@ namespace Modul02Termin03.Controllers
 
         public IActionResult Index()
         {
-            GenreViewModel gvm=new GenreViewModel();
-            gvm.GenresList = new List<SelectListItem>();
+            
+            BookGenreViewModel bgvm=new BookGenreViewModel();
+            bgvm.Book = new Book();
+            bgvm.Genres = this.GenreRepository.GetAll();
 
-            List<Genre> genres = GenreRepository.GetAll();
-            foreach (Genre g in genres)
-            {
-                gvm.GenresList.Add(new SelectListItem() { Text = g.GenreName, Value = g.GenreName });
-            }
-            return View(gvm);
+
+            return View(bgvm);
             
         }
 
@@ -100,29 +98,19 @@ namespace Modul02Termin03.Controllers
 
         }
 
-        public IActionResult Add(string name, double price, int genre) 
+        public IActionResult Add(Book Book) 
         {
-            Book k = new Book();
-            var knjige = BookRepository.GetAll();
-            Genre genreNew = this.GenreRepository.GetOne(genre);
-            //int temp = MaxId();
-            // k.Id = ++temp;
-            k.BookName = name;
-            k.Price = price;
-            k.Genre = genreNew;
-
-            Book BookExists = knjige.Find(x => x.BookName.Equals(name));
-            if (BookExists != null) 
+            ModelState.Remove("Book.Genre.GenreName");
+            if (!ModelState.IsValid)
             {
-                return View("ErrorBookExists");
+             BookGenreViewModel bgvm=new BookGenreViewModel();
+                bgvm.Book = Book;
+                bgvm.Genres=this.GenreRepository.GetAll();
+                return View("Index", bgvm);               
             }
-            else
-            {
-                this.BookRepository.Create(k);
-
-
-            }
-            return View("ShowAllBooks",this.BookRepository.GetAll());
+            Genre genre = this.GenreRepository.GetOne(Book.Genre.Id);
+            this.BookRepository.Create(Book);
+            return View("ShowAllBooks", this.BookRepository.GetAll());
         }
 
         public IActionResult ErrorBookExists()
@@ -151,18 +139,32 @@ namespace Modul02Termin03.Controllers
         {
             Book book = BookRepository.GetOne(Id);
 
-            BookGenreViewModel bgvm = new BookGenreViewModel();
-            bgvm.Book = book;
-            bgvm.Genres = GenreRepository.GetAll();
-            
-            return View(bgvm);
+                BookGenreViewModel bgvm = new BookGenreViewModel();
+                bgvm.Book = book;
+                bgvm.Genres = GenreRepository.GetAll();
+                return View(bgvm);
+
+
+            //return View(bgvm);
 
         }
 
         [HttpPost]
         public IActionResult Modify(Book Book, int oldId)
         {
-            BookRepository.Update(Book, oldId);
+            ModelState.Remove("Book.Genre.GenreName");
+            if (!ModelState.IsValid)
+            {
+                BookGenreViewModel bgvm = new BookGenreViewModel();
+                bgvm.Book = Book;
+                bgvm.Genres = this.GenreRepository.GetAll();
+                return View("Modify", bgvm);
+            }
+
+
+            this.BookRepository.Update(Book, oldId);
+
+            
 
             return View("ShowAllBooks", BookRepository.GetAll());
         }

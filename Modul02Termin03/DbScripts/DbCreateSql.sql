@@ -14,6 +14,8 @@ Deleted bit Default 0
 Foreign key(GenreId) references Genre(id)
 );
 
+ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = OFF
+
 insert into Genre(GenreName) values ('Comedy')
 insert into Genre(GenreName) values ('SF')
 insert into Genre(GenreName) values ('Horror')

@@ -6,7 +6,7 @@
 
 
 
-@model GenreViewModel
+@model BookGenreViewModel
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -24,16 +24,25 @@
             <th colspan='2'>Add new book</th>
             <tr>
                 <th>Name of book :</th>
-                <td><input id='name' type='text' name='name'></td>
+                <td><input id='name' type='text' name='Book.BookName' value="@Model.Book.BookName"/><span style="color:red">@Html.ValidationMessageFor(m => m.Book.BookName)</span></td>
             </tr>
             <tr>
                 <th>Price of the book :</th>
-                <td><input id='price' type='number' name='price'></td>
+                <td>
+                    <input id='price' type='number' name='Book.Price' value=" @Model.Book.Price != 0) ? @Model.Book.Price.ToString() : string.Empty" />
+                    <span style="color:red">@Html.ValidationMessageFor(m => m.Book.Price)</span>
+
+                </td>
             </tr>
             <tr>
                 <th>Genre of the book :</th>
                 <td>
-                        <genre-select></genre-select>
+                    <select name="Book.Genre.Id">
+                        @foreach (Genre genre in Model.Genres)
+                        {
+                            <option value="@genre.Id">@genre.GenreName</option>
+                        }
+                    </select><br />
                 </td>
             </tr>
             <tr>

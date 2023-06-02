@@ -23,7 +23,7 @@ namespace Modul02Termin03.Repository
 
             connection.Open();
 
-            string query = "Select * from Book join Genre on Book.GenreId=Genre.Id and Deleted=0";
+            string query = "Select * from Book join Genre on Book.GenreId=Genre.Id and Book.Deleted=0";
 
             SqlCommand command = connection.CreateCommand();
 
